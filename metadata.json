@@ -1,0 +1,5 @@
+{
+  "name": "App Graph Builder",
+  "description": "A responsive ReactFlow application for managing service node architectures with a node inspector and real-time state management.",
+  "requestFramePermissions": []
+}
