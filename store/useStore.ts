@@ -19,9 +19,9 @@ export const useStore = create<AppState>((set) => ({
   isMobilePanelOpen: false,
   activeInspectorTab: InspectorTab.Config,
 
-  setSelectedAppId: (id) => set({ selectedAppId: id, selectedNodeId: null }), // Reset node selection on app change
+  setSelectedAppId: (id) => set({ selectedAppId: id, selectedNodeId: null }),
   setSelectedNodeId: (id) =>
-    set({ selectedNodeId: id, isMobilePanelOpen: !!id }), // Open mobile panel when node selected
+    set({ selectedNodeId: id, isMobilePanelOpen: !!id }),
   toggleMobilePanel: (isOpen) =>
     set((state) => ({
       isMobilePanelOpen: isOpen ?? !state.isMobilePanelOpen,
