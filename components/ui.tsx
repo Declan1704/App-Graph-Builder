@@ -6,7 +6,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// Button
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "default" | "outline" | "ghost" | "destructive";
   size?: "sm" | "md" | "lg" | "icon";
@@ -45,7 +44,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 Button.displayName = "Button";
 
-// Input
 export const Input = React.forwardRef<
   HTMLInputElement,
   React.InputHTMLAttributes<HTMLInputElement>
@@ -64,7 +62,6 @@ export const Input = React.forwardRef<
 });
 Input.displayName = "Input";
 
-// Badge
 interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?:
     | "default"
@@ -105,7 +102,6 @@ export const Badge = ({
   );
 };
 
-// Tabs
 export const Tabs = ({
   children,
   className,
@@ -157,7 +153,6 @@ export const TabsContent = ({
   );
 };
 
-// Slider
 interface SliderProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange"> {
   value: number;
