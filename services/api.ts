@@ -104,3 +104,22 @@ const createInitialGraph = (appId: string): GraphResponse => {
 
   return { nodes, edges };
 };
+
+const DB: Record<string, GraphResponse> = {
+  "app-1": createInitialGraph("app-1"),
+  "app-2": createInitialGraph("app-2"),
+  "app-3": createInitialGraph("app-3"),
+};
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export const fetchApps = async (): Promise<AppEntity[]> => {
+  await delay(500);
+  return MOCK_APPS;
+};
+
+export const fetchAppGraph = async (appId: string): Promise<GraphResponse> => {
+  await delay(500);
+
+  return JSON.parse(JSON.stringify(DB[appId] || { nodes: [], edges: [] }));
+};
