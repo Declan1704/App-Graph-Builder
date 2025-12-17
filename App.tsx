@@ -28,7 +28,6 @@ function App() {
     selectedAppId,
   } = useStore();
 
-  // We can use useReactFlow here because App is inside ReactFlowProvider in index.tsx
   const { fitView, addNodes } = useReactFlow();
   const queryClient = useQueryClient();
 
@@ -38,7 +37,6 @@ function App() {
       return createNodeInDb(selectedAppId, newNode);
     },
     onSuccess: () => {
-      // Invalidate to ensure consistency, though we also add visually
       queryClient.invalidateQueries({ queryKey: ["graph", selectedAppId] });
     },
   });
@@ -65,7 +63,6 @@ function App() {
 
   return (
     <div className="flex h-screen w-screen flex-col bg-background text-foreground overflow-hidden">
-      {/* Top Bar */}
       <header className="flex h-14 items-center justify-between border-b border-border bg-card px-4 shrink-0 z-20">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 font-bold text-xl">
@@ -111,7 +108,7 @@ function App() {
           <Button variant="ghost" size="icon">
             <Settings className="h-5 w-5" />
           </Button>
-          {/* Mobile Menu Toggle */}
+
           <Button
             variant="outline"
             size="icon"
@@ -124,7 +121,6 @@ function App() {
       </header>
 
       <div className="flex flex-1 overflow-hidden relative">
-        {/* Left Rail (Static) */}
         <aside className="hidden md:flex w-16 flex-col items-center border-r border-border bg-card py-4 gap-4 shrink-0 z-10">
           <Button
             variant="ghost"
@@ -154,11 +150,9 @@ function App() {
           </Button>
         </aside>
 
-        {/* Main Canvas Area */}
         <main className="flex-1 relative bg-black/50">
           <GraphCanvas />
 
-          {/* Mobile Floating Action Button for Adding Nodes */}
           {selectedAppId && (
             <button
               onClick={handleAddNode}
@@ -169,7 +163,6 @@ function App() {
           )}
         </main>
 
-        {/* Right Panel (Desktop: Sidebar, Mobile: Drawer) */}
         <div
           className={cn(
             "fixed inset-y-0 right-0 w-80 bg-card border-l border-border transform transition-transform duration-300 ease-in-out z-30 shadow-2xl",
@@ -177,7 +170,6 @@ function App() {
             "md:relative md:translate-x-0 md:shadow-none"
           )}
         >
-          {/* If a node is selected, show inspector. Otherwise show App List */}
           {selectedNodeId ? (
             <NodeInspector />
           ) : (
@@ -194,7 +186,6 @@ function App() {
           )}
         </div>
 
-        {/* Mobile Overlay */}
         {isMobilePanelOpen && (
           <div
             className="fixed inset-0 bg-black/50 z-20 md:hidden backdrop-blur-sm"
