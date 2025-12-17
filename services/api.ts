@@ -123,3 +123,41 @@ export const fetchAppGraph = async (appId: string): Promise<GraphResponse> => {
 
   return JSON.parse(JSON.stringify(DB[appId] || { nodes: [], edges: [] }));
 };
+
+export const updateNodeInDb = async (
+  appId: string,
+  updatedNode: ServiceNode
+): Promise<ServiceNode> => {
+  await delay(200);
+  const graph = DB[appId];
+  if (graph) {
+    graph.nodes = graph.nodes.map((n) =>
+      n.id === updatedNode.id ? updatedNode : n
+    );
+  }
+  return updatedNode;
+};
+
+export const createNodeInDb = async (
+  appId: string,
+  newNode: ServiceNode
+): Promise<ServiceNode> => {
+  await delay(200);
+  if (DB[appId]) {
+    DB[appId].nodes.push(newNode);
+  }
+  return newNode;
+};
+
+export const deleteNodeFromDb = async (
+  appId: string,
+  nodeId: string
+): Promise<void> => {
+  await delay(200);
+  if (DB[appId]) {
+    DB[appId].nodes = DB[appId].nodes.filter((n) => n.id !== nodeId);
+    DB[appId].edges = DB[appId].edges.filter(
+      (e) => e.source !== nodeId && e.target !== nodeId
+    );
+  }
+};
