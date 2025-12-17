@@ -1,0 +1,40 @@
+{
+  "name": "app-graph-builder",
+  "compatibility_date": "2025-12-17",
+  "workers_dev": true,
+  "account_id": "YOUR_ACCOUNT_ID_HERE",
+  "main": "dist/index.js",
+  "type": "esm",
+  "build": {
+    "command": "npm run build",
+    "upload": {
+      "format": "modules",
+      "dir": "dist"
+    }
+  },
+  "env": {
+    "production": {
+      "workers_dev": false,
+      "route": "https://app.example.com/*",
+      "zone_id": "YOUR_ZONE_ID_HERE"
+    }
+  },
+  "kv_namespaces": [
+    {
+      "binding": "GRAPH_KV",
+      "id": "YOUR_KV_NAMESPACE_ID"
+    }
+  ],
+  "durable_objects": {
+    "bindings": []
+  },
+  "vars": {},
+  "secrets": [],
+  "wasm_modules": [],
+  "triggers": {},
+  "migrations": {
+    "v0": {
+      "tag": "v0"
+    }
+  }
+}
