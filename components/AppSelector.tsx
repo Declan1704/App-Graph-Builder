@@ -4,7 +4,30 @@ import { fetchApps } from "../services/api";
 import { useStore } from "../store/useStore";
 import { Loader2, ChevronRight, LayoutGrid } from "lucide-react";
 import { cn } from "./ui";
+
 const AppSelector: React.FC = () => {
+  const { selectedAppId, setSelectedAppId, toggleMobilePanel } = useStore();
+
+  const {
+    data: apps,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["apps"],
+    queryFn: fetchApps,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="p-4 flex justify-center">
+        <Loader2 className="animate-spin" />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return <div className="p-4 text-red-500 text-sm">Failed to load apps</div>;
+  }
   return (
     <div className="flex flex-col h-full">
       <div className="p-4 border-b border-border">
@@ -63,4 +86,5 @@ const AppSelector: React.FC = () => {
     </div>
   );
 };
+
 export default AppSelector;
