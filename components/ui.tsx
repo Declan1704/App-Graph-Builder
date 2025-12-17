@@ -70,6 +70,7 @@ interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
     | "success"
     | "warning"
     | "danger";
+  className?: string;
 }
 
 export const Badge = ({
@@ -106,11 +107,11 @@ export const Tabs = ({
   children,
   className,
 }: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 }) => <div className={cn("w-full", className)}>{children}</div>;
 
-export const TabsList = ({ children }: { children: React.ReactNode }) => (
+export const TabsList = ({ children }: { children?: React.ReactNode }) => (
   <div className="inline-flex h-10 w-full items-center justify-center rounded-md bg-muted p-1 text-muted-foreground">
     {children}
   </div>
@@ -123,7 +124,7 @@ export const TabsTrigger = ({
 }: {
   active: boolean;
   onClick: () => void;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) => (
   <button
     onClick={onClick}
@@ -143,7 +144,7 @@ export const TabsContent = ({
   children,
 }: {
   active: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) => {
   if (!active) return null;
   return (
